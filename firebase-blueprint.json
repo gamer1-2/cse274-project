@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Platform user",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Product review submitted for analysis",
+      "type": "object",
+      "properties": {
+        "text": { "type": "string" },
+        "productId": { "type": "string" },
+        "userId": { "type": "string" },
+        "prediction": { "type": "string", "enum": ["real", "fake"] },
+        "confidence": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["text", "productId", "userId", "prediction", "confidence", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Analyzed reviews"
+    }
+  }
+}
